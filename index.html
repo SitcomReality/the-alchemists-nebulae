@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Alchemists' Nebulae</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #050505; font-family: 'Courier New', Courier, monospace; }
+        #canvas-container { width: 100vw; height: 100vh; display: block; }
+        #ui-layer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            color: rgba(200, 255, 255, 0.8);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .control-group {
+            pointer-events: auto;
+            background: rgba(0, 10, 20, 0.8);
+            padding: 15px;
+            border: 1px solid rgba(100, 200, 200, 0.3);
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+        }
+        button {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            color: #fff;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        button:hover { background: rgba(0, 255, 255, 0.3); }
+        label { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 12px; }
+        input[type=range] { width: 100%; accent-color: cyan; }
+        h1 { margin: 0 0 10px 0; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.9; }
+        .stats { font-size: 10px; opacity: 0.6; margin-top: 5px; }
+        
+        #start-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.8);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10;
+            cursor: pointer;
+        }
+        #start-text { text-align: center; color: cyan; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://esm.sh/three@0.160.0",
+                "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="start-overlay">
+        <div id="start-text">
+            <h1>The Alchemists' Nebulae</h1>
+            <p>Tap to Initialize Simulation</p>
+        </div>
+    </div>
+    <div id="canvas-container"></div>
+    <div id="ui-layer">
+        <div class="control-group">
+            <h1>Potentials (Rules)</h1>
+            <label>System Entropy (Chaos) <input type="range" id="entropy" min="0" max="100" value="10"></label>
+            <label>Crystal Affinity (Order) <input type="range" id="affinity" min="0" max="100" value="60"></label>
+            <label>Reaction Speed <input type="range" id="speed" min="1" max="20" value="5"></label>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button id="reset-btn">Re-Seed Universe</button>
+                <button id="mutate-btn">Inject Energy</button>
+            </div>
+            <div class="stats" id="stats-display">Step: 0 | Entities: 0</div>
+        </div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
